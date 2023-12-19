@@ -2,9 +2,15 @@
 
 //All campuses
 export const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
+export const ADD_CAMPUS = "ADD_CAMPUS";
+export const DELETE_CAMPUS = "DELETE_CAMPUS";
 
 //Single campus
 export const FETCH_CAMPUS = "FETCH_CAMPUS";
+export const EDIT_CAMPUS = "EDIT_CAMPUS";
+export const ENROLL_NEW_STUDENT = "ENROLL_NEW_STUDENT";
+export const ENROLL_EXISTING_STUDENT = "ENROLL_EXISTING_STUDENT";
+export const UNENROLL_STUDENT = "UNENROLL_STUDENT";
 
 //All students
 export const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
