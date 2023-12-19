@@ -1,3 +1,9 @@
+# Team Members
+1. Michelle Thaung - michelle-thaung
+2. Rita Chen - theritac
+3. Hnin Lwin - hninl23
+4. Arsen Tumanian - arsent1
+
 # client-starter-code
 
 This repository is the client (front-end) starter code for Final Project - Full-Stack CRUD Application.
