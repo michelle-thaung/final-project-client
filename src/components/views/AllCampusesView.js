@@ -5,57 +5,45 @@ The Views component is responsible for rendering web page with data provided by 
 It constructs a React component to display all campuses.
 ================================================== */
 import PropTypes from "prop-types";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Button from '@material-ui/core/Button';
 
 const AllCampusesView = (props) => {
-  const history = useHistory()
   // If there is no campus, display a message.
   if (!props.allCampuses.length) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', textAlign: 'center', flexDirection: 'column', alignItems: 'center' }}>
-        <div>There are no campuses.</div>
-        <Link to={`newcampus`}>
-          <button className="bg-green button">Add New Campus</button>
-        </Link>
-      </div>
+    <div style={{paddingTop:"1em"}}>
+      <p>There are no campuses.</p>
+      <Link to={`newcampus`}>
+        <Button style={{color:"white", backgroundColor:"grey"}}>Add New Campus</Button>
+      </Link>
+    </div>
     );
   }
 
-  console.log(props.allCampuses)
   // If there is at least one campus, render All Campuses view 
   return (
     <div>
       <h1>All Campuses</h1>
 
       {props.allCampuses.map((campus) => (
-        <div class="card" key={campus.id} style={{ margin: "50px auto" }}>
-          <div class="title">
-            {campus.imageUrl && <img src={campus.imageUrl} style={{ width: '200px', height: '200px' }} alt="" />}
-            <h1 onClick={() => history.push(`/campus/${campus.id}`)} style={{ cursor: "pointer" }}>{campus.name}</h1>
-            <h2>campus id: {campus.id}</h2>
-            <h2>{campus.address}</h2>
-            <h2>{campus.description}</h2>
-          </div>
-          <div class="content">
-            <div style={{ display: 'flex', justifyContent: 'center', textAlign: 'center', alignItems: 'center' }}>
-              <button className="button bg-blue" onClick={() => {
-                localStorage.setItem("CurrentCampus", JSON.stringify(campus))
-                history.push(`/editCampus?id=${campus.id}`)
-              }}>Edit</button>
-              <button className="button bg-red" onClick={() => props.handleDelete(campus.id)}>Delete</button>
-            </div>
-          </div>
+        <div key={campus.id}>
+          <Link to={`/campus/${campus.id}`}>
+            <h2>{campus.name}</h2>
+          </Link>
+          <h4>Campus ID: {campus.id}</h4>
+          <img
+            src={campus.imageurl || "https://www.zillowstatic.com/bedrock/app/uploads/sites/26/shutterstock_262043447-dedc70.jpg"}  // Use default if imageUrl is falsy
+            style={{ maxWidth: '100%', maxHeight: '100px' }}  // Adjust styling as needed
+          />
+          <hr/>
         </div>
       ))}
-
-      <br />
-      <div style={{ display: 'flex', justifyContent: 'center', textAlign: 'center', flexDirection: 'column', alignItems: 'center' }}>
-        <Link style={{ textDecoration: 'none' }} to={`/newcampus`}>
-          <button className="bg-green button">Add New Campus</button>
-        </Link>
-      </div>
-
-      <br /><br />
+      <br/>
+      <Link to={`/newcampus`}>
+        <Button style={{color:"white", backgroundColor:"grey"}}>Add New Campus</Button>
+      </Link>
+      <br/><br/>
     </div>
   );
 };
