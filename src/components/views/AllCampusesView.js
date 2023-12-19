@@ -6,11 +6,19 @@ It constructs a React component to display all campuses.
 ================================================== */
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Button from '@material-ui/core/Button';
 
 const AllCampusesView = (props) => {
   // If there is no campus, display a message.
   if (!props.allCampuses.length) {
-    return <div>There are no campuses.</div>;
+    return (
+    <div style={{paddingTop:"1em"}}>
+      <p>There are no campuses.</p>
+      <Link to={`newcampus`}>
+        <Button style={{color:"white", backgroundColor:"grey"}}>Add New Campus</Button>
+      </Link>
+    </div>
+    );
   }
 
   // If there is at least one campus, render All Campuses view 
@@ -23,15 +31,17 @@ const AllCampusesView = (props) => {
           <Link to={`/campus/${campus.id}`}>
             <h2>{campus.name}</h2>
           </Link>
-          <h4>campus id: {campus.id}</h4>
-          <p>{campus.address}</p>
-          <p>{campus.description}</p>
+          <h4>Campus ID: {campus.id}</h4>
+          <img
+            src={campus.imageurl || "https://www.zillowstatic.com/bedrock/app/uploads/sites/26/shutterstock_262043447-dedc70.jpg"}  // Use default if imageUrl is falsy
+            style={{ maxWidth: '100%', maxHeight: '100px' }}  // Adjust styling as needed
+          />
           <hr/>
         </div>
       ))}
       <br/>
-      <Link to={`/`}>
-        <button>Add New Campus</button>
+      <Link to={`/newcampus`}>
+        <Button style={{color:"white", backgroundColor:"grey"}}>Add New Campus</Button>
       </Link>
       <br/><br/>
     </div>
